@@ -1,5 +1,6 @@
 ._.DS_Store
 storage
+/config/name*
 src/html/images/
 src/html/fonts/
 
