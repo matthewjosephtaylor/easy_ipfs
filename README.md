@@ -56,3 +56,4 @@ git clone https://github.com/matthewjosephtaylor/easy_ipfs.git
 
 - All Configuration and data located in `storage/{server-name}/data`
 - The `staging` directory exists to copy files into the container when adding files to IPFS
+- Change Go / Javascript implementation in `config/constants`

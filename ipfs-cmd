@@ -14,4 +14,4 @@ fi
 
 source "${SCRIPT_DIR}/config/constants"
 
-docker exec ${IPFS_SERVER_NAME} ipfs ${@}
+docker exec ${IPFS_SERVER_NAME} ${IPFS_COMMAND_NAME} ${@}
