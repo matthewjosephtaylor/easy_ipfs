@@ -2,8 +2,6 @@
 
 Shell script wrappers around IPFS docker container to make life a bit easier.
 
-Usage:
-
 ## Downloading
 
 ```
