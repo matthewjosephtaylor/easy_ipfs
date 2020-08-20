@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+usage () {
+  echo -e "cat IPFS CID"
+  echo -e "Usage: `basename $0` <file-path>"
+  exit 1
+}
+
+if [ $# -eq 0 ]; then
+  usage
+fi
+source "${SCRIPT_DIR}/config/constants"
+
+declare -r CID=$1
+
+${SCRIPT_DIR}/ipfs-cmd cat "${CID}"

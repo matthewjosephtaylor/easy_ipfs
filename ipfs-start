@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+usage () {
+  echo -e "IPFS Server Start"
+  echo -e "Usage: `basename $0`"
+  exit 1
+}
+
+if [ $# -ne 0 ]; then
+  usage
+fi
+
+source "${SCRIPT_DIR}/config/constants"
+
+echo "Starting IPFS Server : '${IPFS_SERVER_NAME}'"
+echo "STORAGE: '${IPFS_STORAGE_PATH}'"
+echo "STAGING: '${IPFS_STAGING}'"
+echo "DATA: '${IPFS_DATA}'"
+
+mkdir -p "${IPFS_DATA}"
+mkdir -p "${IPFS_STAGING}"
+
+
+# add this to the run command for port exposure
+#  -p "${IPFS_SWARM_PORT}:4001" -p "${IPFS_WS_PORT}:4003" -p "${IPFS_GATEWAY_PORT}:8080" -p "${IPFS_API_PORT}:5001" \
+
+docker run -d --name "${IPFS_SERVER_NAME}" \
+ -v $IPFS_STAGING:/staging:delegated -v $IPFS_DATA:/data/ipfs:delegated \
+"${IPFS_DOCKER_IMAGE}:${IPFS_DOCKER_TAG}"

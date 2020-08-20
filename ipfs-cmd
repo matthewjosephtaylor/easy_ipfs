@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+usage () {
+  echo -e "IPFS command"
+  echo -e "Usage: `basename $0` <ipfs commands....>"
+  exit 1
+}
+
+if [ $# -eq 0 ]; then
+  usage
+fi
+
+source "${SCRIPT_DIR}/config/constants"
+
+docker exec ${IPFS_SERVER_NAME} ipfs ${@}

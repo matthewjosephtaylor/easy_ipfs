@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+usage () {
+  echo -e "Add file to IPFS"
+  echo -e "Usage: `basename $0` <file-path>"
+  exit 1
+}
+
+if [ $# -eq 0 ]; then
+  usage
+fi
+source "${SCRIPT_DIR}/config/constants"
+
+declare -r FULL_FILE_PATH=$1
+
+cp ${FULL_FILE_PATH} ${IPFS_STAGING}
+
+declare -r FILENAME=`basename ${FULL_FILE_PATH}`
+
+
+declare -r RESULT=$(${SCRIPT_DIR}/ipfs-cmd add "/staging/${FILENAME}" 2>/dev/null )
+
+IFS=" "
+read -a result_arr <<< "$RESULT"
+declare -r CID="${result_arr[1]}"
+
+rm "${IPFS_STAGING}/${FILENAME}"
+
+echo "${CID}"
