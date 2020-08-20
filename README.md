@@ -7,8 +7,7 @@ Usage:
 ## Downloading
 
 ```
-git clone <this repo>
-cd <repo-name>
+git clone https://github.com/matthewjosephtaylor/easy_ipfs.git
 ```
 
 ## Starting
