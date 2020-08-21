@@ -4,13 +4,14 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 usage () {
   echo -e "IPFS Server Start"
-  echo -e "Usage: `basename $0`"
-  exit 1
+  echo -e "Usage: `basename $0` [--expose-ports | -ep]"
 }
 
-if [ $# -ne 0 ]; then
+if [[ "$1" =~ ^-h$ || "$1" =~ ^--help$ ]]; then
   usage
+  exit 1
 fi
+
 
 source "${SCRIPT_DIR}/config/constants"
 
@@ -22,10 +23,19 @@ echo "DATA: '${IPFS_DATA}'"
 mkdir -p "${IPFS_DATA}"
 mkdir -p "${IPFS_STAGING}"
 
+if [[ "$1" =~ ^-ep$ || "$1" =~ ^--expose-ports$ ]]; then
+  echo "SWARM PORT: '${IPFS_SWARM_PORT}'"
+  echo "WS PORT: '${IPFS_WS_PORT}'"
+  echo "GATEWAY PORT: '${IPFS_GATEWAY_PORT}'"
+  echo "API PORT: '${IPFS_API_PORT}'"
+  docker run -d --name "${IPFS_SERVER_NAME}" \
+  -v $IPFS_STAGING:/staging:delegated -v $IPFS_DATA:/data/ipfs:delegated \
+  -p "${IPFS_SWARM_PORT}:4001" -p "${IPFS_WS_PORT}:4003" -p "${IPFS_GATEWAY_PORT}:8080" -p "${IPFS_API_PORT}:5001" \
+  "${IPFS_DOCKER_IMAGE}:${IPFS_DOCKER_TAG}"
+else
+  echo "No ports exposed"
+  docker run -d --name "${IPFS_SERVER_NAME}" \
+  -v $IPFS_STAGING:/staging:delegated -v $IPFS_DATA:/data/ipfs:delegated \
+  "${IPFS_DOCKER_IMAGE}:${IPFS_DOCKER_TAG}"
 
-# add this to the run command for port exposure
-#  -p "${IPFS_SWARM_PORT}:4001" -p "${IPFS_WS_PORT}:4003" -p "${IPFS_GATEWAY_PORT}:8080" -p "${IPFS_API_PORT}:5001" \
-
-docker run -d --name "${IPFS_SERVER_NAME}" \
- -v $IPFS_STAGING:/staging:delegated -v $IPFS_DATA:/data/ipfs:delegated \
-"${IPFS_DOCKER_IMAGE}:${IPFS_DOCKER_TAG}"
+fi

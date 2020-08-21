@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+usage () {
+  echo -e "Set MaxStorage Size"
+  echo -e "Usage: `basename $0` <size>"
+  exit 1
+}
+
+if [ $# -ne 1 ]; then
+  usage
+fi
+
+
+source "${SCRIPT_DIR}/config/constants"
+
+STORAGE_SIZE=$1
+
+cd ${SCRIPT_DIR}
+
+./ipfs-cmd config --json Datastore.StorageMax "\"${STORAGE_SIZE}\""

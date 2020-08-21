@@ -4,8 +4,13 @@
 # declare -r IPFS_DOCKER_IMAGE="ipfs/js-ipfs"
 
 # Go implementation
+# declare -r IPFS_COMMAND_NAME="ipfs"
+# declare -r IPFS_DOCKER_IMAGE="ipfs/go-ipfs"
+
+# Local built Go
 declare -r IPFS_COMMAND_NAME="ipfs"
-declare -r IPFS_DOCKER_IMAGE="ipfs/go-ipfs"
+declare -r IPFS_DOCKER_IMAGE="local_build/go-ipfs"
+
 
 declare -r IPFS_DOCKER_TAG="latest"
 declare -r IPFS_SWARM_PORT="4001"

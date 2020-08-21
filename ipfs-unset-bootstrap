@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+usage () {
+  echo -e "Set MaxStorage Size"
+  echo -e "Usage: `basename $0` <size>"
+  exit 1
+}
+
+if [ $# -ne 0 ]; then
+  usage
+fi
+
+
+source "${SCRIPT_DIR}/config/constants"
+
+cd ${SCRIPT_DIR}
+
+# Not truly private. Removes bootstrap nodes but does not set swarm keys which are an experimental feature
+# See https://github.com/ipfs/go-ipfs/blob/master/docs/experimental-features.md#private-networks
+./ipfs-cmd config --json Bootstrap '[]'

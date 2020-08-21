@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+usage () {
+  echo -e "Unremarkable `basename $0`"
+  echo -e "Usage: `basename $0`"
+  exit 1
+}
+
+if [ $# -ne 0 ]; then
+  usage
+fi
+
+
+source "${SCRIPT_DIR}/config/constants"
+
+cd ${SCRIPT_DIR}
+
+./ipfs-cmd config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
+./ipfs-cmd config --json API.HTTPHeaders.Access-Control-Allow-Methods '["GET", "POST", "PUT", "DELETE"]'
