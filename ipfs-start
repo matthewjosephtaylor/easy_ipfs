@@ -34,6 +34,7 @@ if [[ "$1" =~ ^-ep$ || "$1" =~ ^--expose-ports$ ]]; then
   "${IPFS_DOCKER_IMAGE}:${IPFS_DOCKER_TAG}"
 else
   echo "No ports exposed"
+  # docker run --init -d --name "${IPFS_SERVER_NAME}" \
   docker run -d --name "${IPFS_SERVER_NAME}" \
   -v $IPFS_STAGING:/staging:delegated -v $IPFS_DATA:/data/ipfs:delegated \
   "${IPFS_DOCKER_IMAGE}:${IPFS_DOCKER_TAG}"
