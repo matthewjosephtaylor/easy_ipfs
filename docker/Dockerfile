@@ -45,7 +45,7 @@ EXPOSE 8080
 EXPOSE 8081
 
 # Create the fs-repo directory and switch to a non-privileged user.
-ENV IPFS_PATH /data/ipfs
+# ENV IPFS_PATH /data/ipfs
 # RUN groupadd -r ipfs
 # RUN useradd -m -r -d $IPFS_PATH -g ipfs ipfs
 # RUN chown ipfs:ipfs $IPFS_PATH
@@ -57,7 +57,7 @@ ENV IPFS_PATH /data/ipfs
 # Expose the fs-repo as a volume.
 # start_ipfs initializes an fs-repo if none is mounted.
 # Important this happens after the USER directive so permission are correct.
-VOLUME $IPFS_PATH
+# VOLUME $IPFS_PATH
 
 # The default logging level
 ENV IPFS_LOGGING ""
