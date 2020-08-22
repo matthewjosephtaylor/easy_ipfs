@@ -14,9 +14,9 @@ declare -r IPFS_DOCKER_IMAGE="local_build/go-ipfs"
 declare -r IPFS_DOCKER_TAG="latest"
 
 declare -r IPFS_SWARM_PORT="4001"
-declare -r IPFS_WS_PORT="127.0.0.1:4003"
-declare -r IPFS_API_PORT="127.0.0.1:5001"
-declare -r IPFS_GATEWAY_PORT="127.0.0.1:9090"
+declare -r IPFS_WS_PORT="4003"
+declare -r IPFS_API_PORT="5001"
+declare -r IPFS_GATEWAY_PORT="9090"
 
 source "${SCRIPT_DIR}/config/name"
 declare -r IPFS_STORAGE_BASE="${SCRIPT_DIR}/storage"
