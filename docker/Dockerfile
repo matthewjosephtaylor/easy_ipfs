@@ -46,9 +46,9 @@ EXPOSE 8081
 
 # Create the fs-repo directory and switch to a non-privileged user.
 ENV IPFS_PATH /data/ipfs
-RUN groupadd -r ipfs
-RUN useradd -m -r -d $IPFS_PATH -g ipfs ipfs
-RUN chown ipfs:ipfs $IPFS_PATH
+# RUN groupadd -r ipfs
+# RUN useradd -m -r -d $IPFS_PATH -g ipfs ipfs
+# RUN chown ipfs:ipfs $IPFS_PATH
 
 # Create mount points for `ipfs mount` command
 # RUN mkdir /ipfs /ipns \

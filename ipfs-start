@@ -29,6 +29,7 @@ if [[ "$1" =~ ^-ep$ || "$1" =~ ^--expose-ports$ ]]; then
   echo "GATEWAY PORT: '${IPFS_GATEWAY_PORT}'"
   echo "API PORT: '${IPFS_API_PORT}'"
   docker run -d --name "${IPFS_SERVER_NAME}" \
+  --user $(id -u):$(id -g) \
   -v $IPFS_STAGING:/staging:delegated -v $IPFS_DATA:/data/ipfs:delegated \
   -p "${IPFS_SWARM_PORT}:4001" -p "${IPFS_WS_PORT}:4003" -p "${IPFS_GATEWAY_PORT}:8080" -p "${IPFS_API_PORT}:5001" \
   "${IPFS_DOCKER_IMAGE}:${IPFS_DOCKER_TAG}"
@@ -36,6 +37,7 @@ else
   echo "No ports exposed"
   # docker run --init -d --name "${IPFS_SERVER_NAME}" \
   docker run -d --name "${IPFS_SERVER_NAME}" \
+  --user $(id -u):$(id -g) \
   -v $IPFS_STAGING:/staging:delegated -v $IPFS_DATA:/data/ipfs:delegated \
   "${IPFS_DOCKER_IMAGE}:${IPFS_DOCKER_TAG}"
 

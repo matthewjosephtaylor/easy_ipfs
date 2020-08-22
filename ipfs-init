@@ -15,6 +15,7 @@ fi
 source "${SCRIPT_DIR}/config/constants"
 
 docker run -d --name "${IPFS_SERVER_NAME}" \
+  --user $(id -u):$(id -g) \
   -it \
   -v $IPFS_DATA:/data/ipfs:delegated \
   --entrypoint ipfs \
