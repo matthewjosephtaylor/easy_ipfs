@@ -1,0 +1,1 @@
+declare -r IPFS_SERVER_NAME=local_ipfs

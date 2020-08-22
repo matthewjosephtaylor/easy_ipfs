@@ -3,7 +3,7 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 usage () {
-  echo -e "Unremarkable `basename $0`"
+  echo -e "Enable CORS"
   echo -e "Usage: `basename $0`"
   exit 1
 }
