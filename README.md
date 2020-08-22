@@ -2,16 +2,29 @@
 
 Shell script wrappers around IPFS docker container to make life a bit easier.
 
-## Downloading
+## Downloading / Installing
 
 ```
 git clone https://github.com/matthewjosephtaylor/easy_ipfs.git
+cd easy_ipfs
+```
+
+## Build local IPFS container from source (edit config/constants to use the official containers)
+
+```
+./ipfs-build
+```
+
+## Initialize
+
+```
+./ipfs-init
 ```
 
 ## Starting
 
 ```
-./ipfs-start <some-name>
+./ipfs-start [--expose-ports]
 ```
 
 ## Stopping
@@ -23,7 +36,7 @@ git clone https://github.com/matthewjosephtaylor/easy_ipfs.git
 ## Switching servers
 
 ```
-./ipfs-switch <name>
+./ipfs-switch <server-name>
 ```
 
 ## Add file to IPFS
@@ -49,6 +62,10 @@ git clone https://github.com/matthewjosephtaylor/easy_ipfs.git
 ```
 ./ipfs-shell
 ```
+
+## Many other commands
+
+The list of commands will continue to grow over time. Suggest looking at contents of script to see what they do.
 
 ## Details
 

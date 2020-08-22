@@ -13,6 +13,10 @@ if [[ "$1" =~ ^-h$ || "$1" =~ ^--help$ ]]; then
 fi
 
 source "${SCRIPT_DIR}/config/constants"
+cd ${SCRIPT_DIR}
+
+mkdir -p ${IPFS_DATA}
+mkdir -p ${IPFS_STAGING}
 
 docker run -d --name "${IPFS_SERVER_NAME}" \
   --user $(id -u):$(id -g) \
