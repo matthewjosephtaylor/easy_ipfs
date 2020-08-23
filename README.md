@@ -9,7 +9,13 @@ git clone https://github.com/matthewjosephtaylor/easy_ipfs.git
 cd easy_ipfs
 ```
 
+## Configuring
+```
+vi easy_ipfs/config/constants
+```
+
 ## Build local IPFS container from source (edit config/constants to use the official containers)
+- Useful to get latest version on any architecture (like arm64)
 
 ```
 ./ipfs-build
@@ -72,3 +78,7 @@ The list of commands will continue to grow over time. Suggest looking at content
 - All Configuration and data located in `storage/{server-name}/data`
 - The `staging` directory exists to copy files into the container when adding files to IPFS
 - Change Go / Javascript implementation in `config/constants`
+
+## Blame
+
+Matt Taylor https://mjt.dev

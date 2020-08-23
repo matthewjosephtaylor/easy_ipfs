@@ -17,10 +17,8 @@ declare -r DATE_TAG=$(date +%Y%m%d%H%M%S)
 
 cd "${SCRIPT_DIR}/docker"
 
-# --build-arg "APP_CID=${APP_CID}" \
-#  --build-arg "APP_CHECKSUM=${APP_CHECKSUM}" \
-#  --build-arg "IPFS_PROXY=${IPFS_PROXY}" \
-
 docker build \
+ --build-arg "IPFS_VERSION=${IPFS_VERSION}" \
+ --build-arg "GO_VERSION=${GO_VERSION}" \
  -t "${IPFS_DOCKER_IMAGE}:${IPFS_DOCKER_TAG}" \
  -t "${IPFS_DOCKER_IMAGE}:${DATE_TAG}" .

@@ -10,24 +10,23 @@ RUN add-apt-repository ppa:longsleep/golang-backports
 RUN apt-get update
 
 # Need this specific version of golang
-RUN apt-get -y install golang-1.14
+ARG GO_VERSION
+RUN apt-get -y install golang-${GO_VERSION}
 
 # Configure Go
-ENV GOROOT /usr/lib/go-1.14
+ENV GOROOT /usr/lib/go-${GO_VERSION}
 ENV GOPATH /go
-#ENV PATH /go/bin:$PATH
-ENV PATH /usr/lib/go-1.14/bin:/go/bin:$PATH
+ENV PATH /usr/lib/go-${GO_VERSION}/bin:/go/bin:$PATH
 ENV CGO_ENABLED 0
 
 RUN find / -name go
 RUN go version
 
-# https://github.com/ipfs/go-ipfs#download-and-compile-ipfs
+# Checkout and compile IPFS
 WORKDIR /src
 RUN git clone https://github.com/ipfs/go-ipfs.git
-
-# TODO make golang/ipfs versions configurable
-RUN cd go-ipfs; git checkout v0.6.0; make install
+ARG IPFS_VERSION
+RUN cd go-ipfs; git checkout v${IPFS_VERSION}; make install
 RUN find / -name ipfs
 RUN ipfs version
 
