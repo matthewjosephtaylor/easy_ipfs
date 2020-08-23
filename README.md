@@ -40,7 +40,7 @@ vi easy_ipfs/config/constants
 
 ```
 ./ipfs-create-swarm-secret      # Will output a random secret, copy this and use for other nodes in private swarm
-./ipfs-private-setup <secret>
+./ipfs-private-setup            # Will be prompted for <secret>
 ./ipfs-start -ep
 ```
 
