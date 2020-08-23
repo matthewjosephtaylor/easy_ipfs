@@ -12,12 +12,6 @@ if [[ "$1" =~ ^-h$ || "$1" =~ ^--help$ ]]; then
   usage
 fi
 
-if [ $# -eq 0 ]; then
-  usage
-fi
-
-
-declare -r SWARM_SECRET=$1
 
 source "${SCRIPT_DIR}/config/constants"
 cd ${SCRIPT_DIR}
@@ -30,5 +24,5 @@ cd ${SCRIPT_DIR}
 ./ipfs-enable-websocket
 ./ipfs-set-storage-size
 ./ipfs-unset-bootstrap
-./ipfs-set-swarmkey "${SWARM_SECRET}"
+./ipfs-set-swarmkey
 ./ipfs-stop
