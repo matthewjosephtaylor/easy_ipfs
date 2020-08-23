@@ -8,15 +8,22 @@ usage () {
   exit 1
 }
 
-if [ $# -ne 1 ]; then
+if [[ "$1" =~ ^-h$ || "$1" =~ ^--help$ ]]; then
   usage
 fi
 
 
 source "${SCRIPT_DIR}/config/constants"
 
-STORAGE_SIZE=$1
+if [ $# -eq 0 ]; then
+  declare -r DETECTED_SIZE_KB=$(df -Pk . | sed 1d | grep -v used | awk '{ print $4 "\t" }')
+  echo "Detected size of disk in KB: ${DETECTED_SIZE_KB}"
+  declare -r STORAGE_SIZE="$(echo "($DETECTED_SIZE_KB*95/100)" | bc)KB"
+else
+  declare -r STORAGE_SIZE=$1
+fi
+
+echo "Max size to use: ${STORAGE_SIZE}"
 
 cd ${SCRIPT_DIR}
-
 ./ipfs-cmd config --json Datastore.StorageMax "\"${STORAGE_SIZE}\""

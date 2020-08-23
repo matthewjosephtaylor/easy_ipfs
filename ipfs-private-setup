@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+usage () {
+  echo -e "IPFS Private Swarm Setup"
+  echo -e "Usage: `basename $0` <swarm-secret>"
+  exit 1
+}
+
+if [[ "$1" =~ ^-h$ || "$1" =~ ^--help$ ]]; then
+  usage
+fi
+
+if [ $# -eq 0 ]; then
+  usage
+fi
+
+
+declare -r SWARM_SECRET=$1
+
+source "${SCRIPT_DIR}/config/constants"
+cd ${SCRIPT_DIR}
+
+./ipfs-init
+./ipfs-start
+./ipfs-enable-api
+./ipfs-enable-cors
+./ipfs-enable-gateway
+./ipfs-enable-websocket
+./ipfs-set-storage-size
+./ipfs-unset-bootstrap
+./ipfs-set-swarmkey "${SWARM_SECRET}"
+./ipfs-stop

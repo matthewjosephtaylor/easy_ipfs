@@ -1,6 +1,11 @@
 # Easy IPFS
 
-Shell script wrappers around IPFS docker container to make life a bit easier.
+Shell script wrappers around IPFS docker containers to make life a bit easier.
+
+Allows one to easily manage IPFS inside a docker container
+- Build different versions of IPFS
+- One command setup for a public swarm or private swarm
+- Easily manage IPFS configuration
 
 ## Downloading / Installing
 

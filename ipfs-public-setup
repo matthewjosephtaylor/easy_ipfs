@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+usage () {
+  echo -e "IPFS Public Swarm Setup"
+  echo -e "Usage: `basename $0` <ipfs commands....>"
+  exit 1
+}
+
+if [[ "$1" =~ ^-h$ || "$1" =~ ^--help$ ]]; then
+  usage
+fi
+
+source "${SCRIPT_DIR}/config/constants"
+cd ${SCRIPT_DIR}
+
+./ipfs-init
+./ipfs-start
+# Begins in public boostrap, better to use the official bootstrap peers
+#${SCRIPT_DIR}/ipfs-reset-bootstrap
+./ipfs-enable-api
+./ipfs-enable-cors
+./ipfs-enable-gateway
+./ipfs-enable-websocket
+./ipfs-set-storage-size
+./ipfs-stop
+
