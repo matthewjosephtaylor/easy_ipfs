@@ -3,6 +3,7 @@
 Shell script wrappers around IPFS docker containers to make life a bit easier.
 
 Allows one to easily manage IPFS inside a docker container
+
 - Build different versions of IPFS
 - One command setup for a public swarm or private swarm
 - Easily manage IPFS configuration
@@ -15,39 +16,54 @@ cd easy_ipfs
 ```
 
 ## Configuring
+
 ```
 vi easy_ipfs/config/constants
 ```
 
 ## Build local IPFS container from source (edit config/constants to use the official containers)
+
 - Useful to get latest version on any architecture (like arm64)
 
 ```
 ./ipfs-build
 ```
 
-## Initialize
+## Setup public IPFS container
 
 ```
-./ipfs-init
+./ipfs-public-setup
+./ipfs-start -ep
 ```
 
-## Starting
+## Setup private IPFS container
+
+```
+./ipfs-create-swarm-secret      # Will output a random secret, copy this and use for other nodes in private swarm
+./ipfs-private-setup <secret>
+./ipfs-start -ep
+```
+
+## Start container
+
+- Start with either the container ports exposed or unexposed (default unexposed)
 
 ```
 ./ipfs-start [--expose-ports]
 ```
 
-## Stopping
+## Stop container
 
 ```
 ./ipfs-stop
 ```
 
-## Switching servers
+## Switch container
+- Can have multiple containers running at once.
+- NOTE: currently only one container can have ports exposed since they all share the same config
 
 ```
-./ipfs-switch <server-name>
+./ipfs-switch <container-name>
 ```
 
 ## Add file to IPFS
