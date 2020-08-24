@@ -47,7 +47,17 @@ ENV IPFS_PATH /data/ipfs
 # The default logging level
 ENV IPFS_LOGGING ""
 
-ENTRYPOINT ["/usr/bin/tini", "--", "/go/bin/ipfs"]
+# https://gnanesh.me/avahi-docker-non-root.html
+RUN apt-get install -y --no-install-recommends avahi-daemon libnss-mdns
+RUN printf "[server]\nenable-dbus=no\n" >> /etc/avahi/avahi-daemon.conf \
+ && chmod 777 /etc/avahi/avahi-daemon.conf \
+ && mkdir -p /var/run/avahi-daemon \
+ && chown avahi:avahi /var/run/avahi-daemon \
+ && chmod 777 /var/run/avahi-daemon
+COPY entrypoint /app/entrypoint
+# ENTRYPOINT ["/usr/bin/tini", "--", "/go/bin/ipfs"]
+ENTRYPOINT ["/app/entrypoint", "/go/bin/ipfs"]
+# ENTRYPOINT ["bash", "/app/entrypoint"]
 
 # Execute the daemon subcommand by default
 CMD ["daemon", "--migrate=true"]
