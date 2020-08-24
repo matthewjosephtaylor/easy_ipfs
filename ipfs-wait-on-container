@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+usage () {
+  echo -e "Wait on IPFS container to be in Running state"
+  echo -e "Usage: `basename $0`"
+  exit 1
+}
+
+if [[ "$1" =~ ^-h$ || "$1" =~ ^--help$ ]]; then
+  usage
+fi
+
+source "${SCRIPT_DIR}/config/constants"
+
+until [ -n "$(docker logs "${IPFS_SERVER_NAME}" | grep 'Daemon is ready')" ]; do
+    sleep 0.5;
+done;

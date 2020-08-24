@@ -26,5 +26,6 @@ docker run -d --name "${IPFS_SERVER_NAME}" \
   "${IPFS_DOCKER_IMAGE}:${IPFS_DOCKER_TAG}" \
   init
 
-${SCRIPT_DIR}/ipfs-logs
-${SCRIPT_DIR}/ipfs-stop
+./ipfs-logs
+./ipfs-stop
+

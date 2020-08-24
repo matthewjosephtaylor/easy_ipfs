@@ -18,6 +18,7 @@ cd ${SCRIPT_DIR}
 
 ./ipfs-init
 ./ipfs-start
+./ipfs-wait-on-container
 ./ipfs-enable-api
 ./ipfs-enable-cors
 ./ipfs-enable-gateway
