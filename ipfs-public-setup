@@ -17,6 +17,7 @@ cd ${SCRIPT_DIR}
 
 ./ipfs-init
 ./ipfs-start
+./ipfs-wait-on-container
 # Begins in public boostrap, better to use the official bootstrap peers
 #${SCRIPT_DIR}/ipfs-reset-bootstrap
 ./ipfs-enable-api

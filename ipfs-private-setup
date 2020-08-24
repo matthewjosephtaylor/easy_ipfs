@@ -25,5 +25,5 @@ cd ${SCRIPT_DIR}
 ./ipfs-enable-websocket
 ./ipfs-set-storage-size
 ./ipfs-unset-bootstrap
-./ipfs-set-swarmkey
+./ipfs-set-swarm-secret
 ./ipfs-stop
