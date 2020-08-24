@@ -14,6 +14,6 @@ fi
 
 source "${SCRIPT_DIR}/config/constants"
 
-docker exec -it "${IPFS_SERVER_NAME}" bash
+docker exec -it -u root "${IPFS_SERVER_NAME}" bash
 
 

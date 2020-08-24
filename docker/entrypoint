@@ -14,6 +14,14 @@ fi
 
 set -e
 
+# MDNS_HOSTNAME="mfoo"
+# echo "setting mDNS hostname to ${MDNS_HOSTNAME}"
+# TFILE=`mktemp --tmpdir tfile.XXXXX`
+# trap "rm -f $TFILE" 0 1 2 3 15
+# # sed "s/\(host-name=\).*/\1${MDNS_HOSTNAME}/g"  /etc/avahi/avahi-daemon.conf > "$TFILE"
+# sed "s/#host-name=.*/host-name=${MDNS_HOSTNAME}/g"  /etc/avahi/avahi-daemon.conf > "$TFILE"
+# cat "$TFILE" > /etc/avahi/avahi-daemon.conf 
+
 # start avahi's dependency
 # service dbus start
 
