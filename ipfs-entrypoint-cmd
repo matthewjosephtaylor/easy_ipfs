@@ -3,7 +3,7 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 usage () {
-  echo -e "IPFS command"
+  echo -e "IPFS entrypoint command"
   echo -e "Usage: `basename $0` <ipfs commands....>"
   exit 1
 }
@@ -12,13 +12,22 @@ if [[ "$1" =~ ^-h$ || "$1" =~ ^--help$ ]]; then
   usage
 fi
 
+if [ $# -eq 0 ]; then
+  usage
+fi
+
+
 source "${SCRIPT_DIR}/config/constants"
 cd ${SCRIPT_DIR}
 
-mkdir -p ${IPFS_DATA}
-mkdir -p ${IPFS_STAGING}
+docker run -d --name "${IPFS_SERVER_NAME}" \
+  --user $(id -u):$(id -g) \
+  -it \
+  -v $IPFS_DATA:/data/ipfs:delegated \
+  --entrypoint ipfs \
+  "${IPFS_DOCKER_IMAGE}:${IPFS_DOCKER_TAG}" \
+  "${@}" > /dev/null
 
-./ipfs-entrypoint-cmd init
 ./ipfs-logs
 ./ipfs-stop
 

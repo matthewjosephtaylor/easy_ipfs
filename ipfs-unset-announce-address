@@ -3,7 +3,7 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 usage () {
-  echo -e "Set IPFS announce address"
+  echo -e "Unset IPFS announce address"
   echo -e "Usage: `basename $0` <ipfs commands....>"
   exit 1
 }

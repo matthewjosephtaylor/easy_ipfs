@@ -13,12 +13,5 @@ if [ $# -eq 0 ]; then
 fi
 
 source "${SCRIPT_DIR}/config/constants"
-cd "${SCRIPT_DIR}"
 
-if [ "$(docker ps -q -f name=${IPFS_SERVER_NAME})" ]; then
-  ./ipfs-exec-cmd "${@}"
-else
-  ./ipfs-entrypoint-cmd "${@}"
-fi
-
-# docker exec ${IPFS_SERVER_NAME} ${IPFS_COMMAND_NAME} "${@}"
+docker exec ${IPFS_SERVER_NAME} ${IPFS_COMMAND_NAME} "${@}"

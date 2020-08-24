@@ -14,6 +14,6 @@ fi
 
 source "${SCRIPT_DIR}/config/constants"
 
-docker stop "${IPFS_SERVER_NAME}"
-docker rm "${IPFS_SERVER_NAME}"
+docker stop "${IPFS_SERVER_NAME}" > /dev/null
+docker rm "${IPFS_SERVER_NAME}" > /dev/null
 

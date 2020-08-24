@@ -15,7 +15,7 @@ fi
 source "${SCRIPT_DIR}/config/constants"
 
 IFCONFIG_IP=`ifconfig ${NET_IF} 2>/dev/null | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
-HOSTNAME_IP=`hostname --ip-address | cut -d' ' -f1`
+HOSTNAME_IP=`hostname --ip-address 2>/dev/null| cut -d' ' -f1`
 echo "hostname IP: ${HOSTNAME_IP}"
 echo "ifconfig IP: ${IFCONFIG_IP}"
 PRIMARY_IP=${IFCONFIG_IP}
@@ -25,4 +25,4 @@ echo "PRIMARY IP: ${PRIMARY_IP}"
 declare -r IPFS_ID=$(./ipfs-get-id)
 echo "IPFS ID: ${IPFS_ID}"
 
-./ipfs-cmd config --json Addresses.Announce "[ \"/ip4/${PRIMARY_IP}/tcp/4001/p2p/${IPFS_ID}\" ]"
+./ipfs-cmd config --json Addresses.Announce "[ \"/ip4/${PRIMARY_IP}/tcp/${IPFS_SWARM_PORT}/p2p/${IPFS_ID}\" ]"
