@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+usage () {
+  echo -e "Set IPFS announce address"
+  echo -e "Usage: `basename $0` <ipfs commands....>"
+  exit 1
+}
+
+if [[ "$1" =~ ^-h$ || "$1" =~ ^--help$ ]]; then
+  usage
+fi
+
+source "${SCRIPT_DIR}/config/constants"
+
+./ipfs-cmd config --json Addresses.Announce "[]"
