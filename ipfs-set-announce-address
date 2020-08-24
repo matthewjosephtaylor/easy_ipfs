@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+usage () {
+  echo -e "Set IPFS announce address"
+  echo -e "Usage: `basename $0` <ipfs commands....>"
+  exit 1
+}
+
+if [[ "$1" =~ ^-h$ || "$1" =~ ^--help$ ]]; then
+  usage
+fi
+
+source "${SCRIPT_DIR}/config/constants"
+
+declare -r MDNS_NAME="$(hostname -s).local"
+
+echo "MDNS NAME: ${MDNS_NAME}"
+declare -r IPFS_ID=$(./ipfs-get-id)
+
+echo "IPFS ID: ${IPFS_ID}"
+./ipfs-cmd config --json Addresses.Announce "[ \"/dnsaddr/${MDNS_NAME}/p2p/${IPFS_ID}\" ]"

@@ -3,7 +3,7 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 usage () {
-  echo -e "cat IPFS CID"
+  echo -e "Get IPFS node ID"
   echo -e "Usage: `basename $0` <file-path>"
   exit 1
 }
@@ -14,6 +14,4 @@ fi
 
 source "${SCRIPT_DIR}/config/constants"
 
-declare -r CID=$1
-
-${SCRIPT_DIR}/ipfs-cmd cat "${CID}"
+${SCRIPT_DIR}/ipfs-cmd id | jq -r '.ID'
