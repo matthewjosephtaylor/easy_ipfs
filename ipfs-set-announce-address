@@ -20,4 +20,4 @@ echo "MDNS NAME: ${MDNS_NAME}"
 declare -r IPFS_ID=$(./ipfs-get-id)
 
 echo "IPFS ID: ${IPFS_ID}"
-./ipfs-cmd config --json Addresses.Announce "[ \"/dnsaddr/${MDNS_NAME}/p2p/${IPFS_ID}\" ]"
+./ipfs-cmd config --json Addresses.Announce "[ \"/dnsaddr/${MDNS_NAME}/tcp/4001/p2p/${IPFS_ID}\" ]"
